@@ -54,7 +54,7 @@ value: "8"
 apiVersion: harvesterhci.io/v1beta1
 kind: VirtualMachineImage
 metadata:
-  name: rocky95
+  name: rocky10.1
   annotations:
     harvesterhci.io/storageClassName: harvester-longhorn
   labels:
@@ -62,7 +62,7 @@ metadata:
     harvesterhci.io/os-type: rocky
   namespace: default
 spec:
-  displayName: rocky10
+  displayName: rocky10.1
   retry: 3
   sourceType: download
   storageClassParameters:

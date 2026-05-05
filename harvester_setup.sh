@@ -107,7 +107,7 @@ data:
           apt install -y htop jq
         elif grep -q "Rocky" /etc/os-release; then
           echo "Rocky"
-          yum install -y epel-release bind-utils && yum install -y htop jq
+          yum install -y epel-release bind-utils && yum install -y htop jq pciutils
           systemctl disable --now cockpit.service cockpit.socket
           yum remove -y cockpit-bridge cockpit-system cockpit-ws rpcbind
         else

@@ -79,7 +79,7 @@ Add the Hauler binary to the `/opt/pure` directory.
 
 compress
 
-`tar -cf /opt/pure_airgap_$(date '+%m_%d_%y').tar $(ls)`
+`tar -cf /opt/pxcsi_airgap_$(date '+%m_%d_%y').tar $(ls)`
 
 ---
 
@@ -95,7 +95,7 @@ Once you have the tar on the air gapped side we need to uncompress it on the lin
 
 ```bash
 mkdir -p /opt/pure/cert
-tar -vxf pure_airgap_$(date '+%m_%d_%y').tar -C /opt/pure
+tar -vxf pxcsi_airgap_$(date '+%m_%d_%y').tar -C /opt/pure
 cd /opt/pure
 ```
 

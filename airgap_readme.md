@@ -26,20 +26,15 @@ metadata:
   name: pure-files
 spec:
   files:
-    #- path: https://releases.purestorage.com/flasharray/purity/6.9.2/purity_6.9.2_202510142333%2Baf11cde1386b.ppkg
-    #- path: https://releases.purestorage.com/flasharray/purity/6.9.2/purity_6.9.2_202510142333%2Baf11cde1386b.ppkg.sha1
-    #- path: https://raw.githubusercontent.com/PureStorage-OpenConnect/pure-fa-openmetrics-exporter/refs/heads/master/extra/grafana/grafana-purefa-flasharray-overview.json
-    # - path: https://releases.rancher.com/harvester/v1.7.1/harvester-v1.7.1-amd64.iso
-    - path: https://install.portworx.com/$PX_CSI_VER/version?kbver=1.32.8
+    - path: https://install.portworx.com/$PX_CSI_VER/version?kbver=1.35.4
       name: versions.yaml
-    - path: https://install.portworx.com/$PX_CSI_VER?comp=pxoperator&oem=px-csi&kbver=1.32.3&ns=portworx
+    - path: https://install.portworx.com/$PX_CSI_VER?comp=pxoperator&oem=px-csi&kbver=1.35.4&ns=portworx
       name: operator.yaml
     - path: https://raw.githubusercontent.com/clemenko/px-harvester/refs/heads/main/readme.md
       name: px_harvester.md
     - path: https://raw.githubusercontent.com/clemenko/px-harvester/refs/heads/main/StorageCluster_example.yaml
     - path: https://raw.githubusercontent.com/clemenko/px-harvester/refs/heads/main/airgap_readme.md
-    - path: https://mirrors.portworx.com/packages/px-cli/latest/px-v1.2.0.linux.amd64.tar.gz
-    # - path: https://cloud-images.ubuntu.com/minimal/releases/plucky/release/ubuntu-25.04-minimal-cloudimg-amd64.img
+    - path: https://mirrors.portworx.com/packages/px-cli/latest/px-v1.4.0.linux.amd64.tar.gz
 ---
 apiVersion: content.hauler.cattle.io/v1
 kind: Charts
@@ -53,7 +48,7 @@ spec:
 apiVersion: content.hauler.cattle.io/v1
 kind: Images
 metadata:
-  name: rancher-images
+  name: portworx-images
   annotations:
     hauler.dev/platform: linux/amd64
 spec:       
@@ -312,7 +307,7 @@ metadata:
     portworx.io/misc-args: "--oem px-csi"
 #    portworx.io/health-check: "skip"
 spec:
-  image: portworx/px-pure-csi-driver:25.8.0
+  image: portworx/px-pure-csi-driver:28.2.0
   imagePullPolicy: IfNotPresent
   customImageRegistry: X.X.X.X
   # imagePullSecret: px-reg-secret
@@ -324,6 +319,9 @@ spec:
     prometheus:
       enabled: false
       exportMetrics: false
+  purePlatform:
+    fusion:
+      enabled: false
   env:
   - name: PURE_FLASHARRAY_SAN_TYPE
     value: "ISCSI"

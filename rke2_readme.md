@@ -7,7 +7,7 @@ This is a quick guide for adding Portworx CSI ( PX-CSI 26.1.0 ) to RKE2.
 to all the harvester nodes
 
 ```bash
-dnf install -y wget nfs-utils cryptsetup iscsi-initiator-utils epel-release iptables-services iptables-utils device-mapper-multipath
+dnf install -y nfs-utils cryptsetup iscsi-initiator-utils iptables-services iptables-utils device-mapper-multipath
 systemctl enable --now iscsid
 
 cat << EOF >> /etc/multipath.conf

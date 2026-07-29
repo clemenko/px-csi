@@ -130,7 +130,7 @@ kubectl apply -f 'https://install.portworx.com/'$PX_CSI_VER'?comp=pxoperator&oem
 
 # add annotation of "portworx.io/health-check: "skip" " for running on a single node
 
-#  If you want nvme-tcp change the value: "NVMEOF-TCP"
+#  If you want nvme-tcp change the value: "NVMEOF-TCP" "FC"
 
 # or FA NFS : https://docs.portworx.com/portworx-csi/provision-storage/dynamic-provisioning/flasharray-file-services
 
@@ -167,7 +167,7 @@ Update the Harvester CSI settings - https://docs.harvesterhci.io/v1.8/advanced/c
 ## add image
 
 ```bash
-cat << EOF | kubectl apply -f -
+kubectl apply -f - << EOF 
 apiVersion: harvesterhci.io/v1beta1
 kind: VirtualMachineImage
 metadata:
@@ -192,14 +192,14 @@ kubectl apply -n portworx  -f - << EOF
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: demopvc
+  name: demopvc2
 spec:
   storageClassName: px-fa-direct-access
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1234Mi
+      storage: 10234Mi
 EOF
 ```
 

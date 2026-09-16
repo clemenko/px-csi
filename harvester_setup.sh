@@ -43,6 +43,10 @@ export KUBECONFIG=$vip.yaml
 
 # load password length, image, network, keypair and template
 info " - configuring password length, images, network, and keypair"
+
+# patch for 1.9.0
+kubectl annotate clusternetwork mgmt network.harvesterhci.io/uplink-mtu=9000
+
 cat <<EOF | kubectl apply -f -  > /dev/null 2>&1
 apiVersion: management.cattle.io/v3
 kind: Setting

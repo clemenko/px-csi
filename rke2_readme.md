@@ -98,7 +98,7 @@ EOF
 kubectl create secret generic px-pure-secret -n portworx --from-file=pure.json=pure.json
 
 # apply operator yaml
-kubectl apply -f 'https://install.portworx.com/'$PX_CSI_VER'?comp=pxoperator&oem=px-csi&kbver=1.35.6&ns=portworx'
+kubectl apply -f 'https://install.portworx.com/'$PX_CSI_VER'?comp=pxoperator&oem=px-csi&kbver=1.36.4&ns=portworx'
 
 # add annotation of "portworx.io/health-check: "skip" " for running on a single node
 
@@ -160,7 +160,7 @@ EOF
 ## or a simple pvc test
 
 ```bash
-kubectl apply -n portworx  -f - << EOF 
+kubectl apply -n default  -f - << EOF 
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -171,11 +171,40 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10234Mi
+      storage: 500Mi
 EOF
 ```
 
-Success.
+## mount something
+
+```bash
+kubectl apply -n default -f - <<'EOF'
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demopvc2-resize
+spec:
+  containers:
+  - name: shell
+    image: busybox
+    command: ["sleep", "360000"]
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: demopvc2
+EOF
+```
+
+## expand?
+
+```bash
+kubectl patch pvc demopvc2 -n default -p '{"spec":{"resources":{"requests":{"storage":"2Gi"}}}}'
+```
+
+Great Success.
 
 ## optional storage class
 
